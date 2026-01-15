@@ -15,6 +15,9 @@
             <a data-target="playlist">歌单</a>
             <a data-target="fanwork">切片</a>
             <a data-target="photo">照片墙</a>
+            <a data-target="wiki">直播间梗百科</a>
+            <a data-target="投稿">水友投稿</a>
+
         </div>
 
         <!-- 首页内容 -->
@@ -86,112 +89,172 @@
             <h2 style="text-align: center; margin-bottom: 20px;font-size: 25px;">暂未更新 🎵</h2>
         </div>
 
-  
-            <!-- 精彩瞬间内容（修改后） -->
-        <div id="photo" class="content-section">
-        <h2 style="text-align: center; margin-bottom: 20px;font-size: 25px;"> </h2>
-        <!-- 图片展示容器 -->
-        <div class="photo-gallery" id="photoGallery">
-        <div class="loading-tip">正在加载图片...</div>
+         <!-- 直播间梗百科内容 -->
+        <div id="wiki" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 20px;font-size: 25px;">等待施工</h2>
         </div>
-    
-        <!-- 新增：图片预览弹窗 -->
-        <div id="imagePreviewModal" class="image-preview-modal">
-        <button class="close-btn" onclick="closeImagePreview()">×</button>
-        <img id="previewImage" class="preview-image" src="" alt="原图预览">
-        </div>
-    
-        <!-- 精彩瞬间样式（新增弹窗样式） -->
-        <style>
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            padding: 0 20px 20px;
-        }
-        .photo-item {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            cursor: zoom-in; /* 鼠标悬浮显示放大图标，提示可点击 */
-        }
-        .photo-item:hover {
-            transform: scale(1.03);
-        }
-        .photo-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-        .photo-item p {
-            padding: 8px 10px;
-            font-size: 14px;
-            color: #333;
-            background: #f8f8f8;
-            margin: 0;
-        }
-        .loading-tip, .error-tip, .no-data-tip {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px 0;
-            font-size: 16px;
-            color: #666;
-        }
-        .error-tip {
-            color: #ff7875;
-        }
-        @media (max-width: 768px) {
-            .photo-gallery {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 10px;
-            }
-            .photo-item img {
-                height: 160px;
-            }
-        }
 
-        /* 核心修改：图片预览弹窗样式 - 贴合图片尺寸 */
-        .image-preview-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999; /* 确保弹窗在最上层 */
-            padding: 0; /* 移除默认内边距，避免空白 */
-        }
-        .preview-image {
-            width: auto; /* 宽度自适应 */
-            height: auto; /* 高度自适应 */
-            max-width: 95vw; /* 最大宽度不超过视口95% */
-            max-height: 95vh; /* 最大高度不超过视口95% */
-            object-fit: contain; /* 保持图片比例 */
-            border-radius: 4px;
-            display: block; /* 消除图片底部空白 */
-        }
-        .close-btn {
-            position: fixed; /* 固定在右上角，不随图片位置变化 */
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            transition: color 0.2s ease;
-            z-index: 10000; /* 确保关闭按钮在图片上层 */
-        }
-        .close-btn:hover {
-            color: #ff7875;
-        }
-        </style>
+        <!-- 水友投稿内容 -->
+        <div id="投稿" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 20px;font-size: 25px;">等待施工</h2>
+        </div>
+
+        <!-- 照片墙内容（拆分3个子版块） -->
+        <div id="photo" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 20px;font-size: 25px;"> </h2>
+            
+            <!-- 新增：照片分类切换导航 -->
+            <div class="photo-category-nav" style="text-align: center; margin-bottom: 20px;">
+                <button class="category-btn active" data-category="豌豆">豌豆</button>
+                <button class="category-btn" data-category="豆酒">豆酒</button>
+                <button class="category-btn" data-category="合照">合照</button>
+            </div>
+
+            <!-- 图片展示容器 -->
+            <div class="photo-gallery" id="photoGallery">
+                <div class="loading-tip">正在加载图片...</div>
+            </div>
+        
+            <!-- 图片预览弹窗 -->
+            <div id="imagePreviewModal" class="image-preview-modal">
+                <button class="close-btn" onclick="closeImagePreview()">×</button>
+                <img id="previewImage" class="preview-image" src="" alt="原图预览">
+            </div>
+        
+            <!-- 照片墙样式 -->
+            <style>
+                /* 新增：分类切换按钮样式 */
+                .photo-category-nav {
+                    display: flex;
+                    justify-content: center;
+                    gap: 15px;
+                    flex-wrap: wrap;
+                    padding: 0 20px;
+                }
+                .category-btn {
+                    padding: 8px 20px;
+                    border: none;
+                    border-radius: 20px;
+                    background: #f0f0f0;
+                    color: #333;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                .category-btn.active {
+                    background: #e63946;
+                    color: white;
+                }
+                .category-btn:hover:not(.active) {
+                    background: #e8e8e8;
+                }
+
+                .photo-gallery {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                    gap: 15px;
+                    padding: 0 20px 20px;
+                }
+                .photo-item {
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    transition: transform 0.3s ease;
+                    cursor: zoom-in;
+                }
+                .photo-item:hover {
+                    transform: scale(1.03);
+                }
+                .photo-item img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    display: block;
+                }
+                .photo-item p {
+                    padding: 8px 10px;
+                    font-size: 14px;
+                    color: #333;
+                    background: #f8f8f8;
+                    margin: 0;
+                }
+                .loading-tip, .error-tip, .no-data-tip {
+                    grid-column: 1 / -1;
+                    text-align: center;
+                    padding: 40px 0;
+                    font-size: 16px;
+                    color: #666;
+                }
+                .error-tip {
+                    color: #ff7875;
+                }
+                @media (max-width: 768px) {
+                    .photo-gallery {
+                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                        gap: 10px;
+                    }
+                    .photo-item img {
+                        height: 160px;
+                    }
+                    .category-btn {
+                        padding: 6px 15px;
+                        font-size: 14px;
+                    }
+                }
+
+                /* 图片预览弹窗样式 */
+                .image-preview-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 9999;
+                    padding: 20px;
+                }
+                .preview-image {
+                    width: auto;
+                    height: auto;
+                    max-width: 90vw;
+                    max-height: 90vh;
+                    object-fit: contain;
+                    border-radius: 4px;
+                    display: block;
+                    background: #fff;
+                    padding: 2px;
+                }
+                .close-btn {
+                    position: absolute;
+                    top: -15px;
+                    right: -15px;
+                    color: white;
+                    font-size: 30px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    background: rgba(0,0,0,0.8);
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: none;
+                    transition: all 0.2s ease;
+                    z-index: 10000;
+                }
+                .close-btn:hover {
+                    background: #ff7875;
+                    color: white;
+                }
+                #previewImageWrapper {
+                    position: relative;
+                    display: inline-block;
+                }
+            </style>
         </div>
         
         <!-- 切片内容 -->
@@ -240,43 +303,93 @@
                 const targetId = this.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
                 
-                // 切换到精彩瞬间时加载图片
+                // 切换到照片墙时加载图片（默认加载豌豆分类）
                 if (targetId === 'photo') {
-                    loadPhotoGallery();
+                    loadPhotoGallery('豌豆');
                 }
             });
         });
 
-        // ========== 照片墙模块功能 ==========
-        function loadPhotoGallery() {
-        const galleryContainer = document.getElementById('photoGallery');
-        if (!galleryContainer) return;
+        // ========== 照片墙模块功能（拆分3个子版块） ==========
+        // 全局变量：存储所有照片数据
+        let allPhotoData = [];
 
-        // 清空容器并显示加载提示
-        galleryContainer.innerHTML = '<div class="loading-tip">正在加载图片...</div>';
+        // 绑定分类切换事件
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除所有分类按钮激活状态
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                // 激活当前分类
+                this.classList.add('active');
+                // 加载对应分类图片
+                const category = this.getAttribute('data-category');
+                loadPhotoGallery(category);
+            });
+        });
 
-        // 请求photo.json文件
-        fetch('photo.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`请求失败：${response.status} ${response.statusText}`);
+        // 加载指定分类的图片
+        function loadPhotoGallery(category) {
+            const galleryContainer = document.getElementById('photoGallery');
+            if (!galleryContainer) return;
+
+            // 清空容器并显示加载提示
+            galleryContainer.innerHTML = '<div class="loading-tip">正在加载图片...</div>';
+
+            // 如果已有数据，直接筛选展示；否则请求JSON文件
+            if (allPhotoData.length > 0) {
+                renderPhotoByCategory(category);
+                return;
             }
-            return response.json();
-        })
-        .then(photoData => {
+
+            // 请求photo.json文件
+            fetch('photo.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`请求失败：${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(photoData => {
+                // 保存所有照片数据到全局变量
+                allPhotoData = photoData;
+                // 渲染指定分类的图片
+                renderPhotoByCategory(category);
+            })
+            .catch(error => {
+                // 显示错误提示
+                galleryContainer.innerHTML = `<div class="error-tip">加载失败：${error.message}</div>`;
+                console.error('照片墙图片加载错误：', error);
+            });
+        }
+
+        // 根据分类筛选并渲染图片
+        function renderPhotoByCategory(category) {
+            const galleryContainer = document.getElementById('photoGallery');
+            
             // 校验数据格式
-            if (!Array.isArray(photoData) || photoData.length === 0) {
-                galleryContainer.innerHTML = '<div class="no-data-tip">暂无精彩瞬间图片</div>';
+            if (!Array.isArray(allPhotoData) || allPhotoData.length === 0) {
+                galleryContainer.innerHTML = '<div class="no-data-tip">暂无照片墙图片</div>';
+                return;
+            }
+
+            // 筛选指定分类的图片
+            const filteredPhotos = allPhotoData.filter(photo => {
+                // 兼容没有category字段的图片（默认归为豌豆分类）
+                return photo.category === category || (category === '豌豆' && !photo.category);
+            });
+
+            // 如果该分类无图片
+            if (filteredPhotos.length === 0) {
+                galleryContainer.innerHTML = `<div class="no-data-tip">暂无${category}相关图片</div>`;
                 return;
             }
 
             // 渲染图片列表
             galleryContainer.innerHTML = '';
-            photoData.forEach((photo, index) => {
+            filteredPhotos.forEach((photo, index) => {
                 // 校验单张图片数据
                 const imgUrl = photo.url || '';
-                // 核心修改：从photo.imgdesc读取描述，无则使用兜底文本
-                const imgDesc = photo.imgdesc || `精彩瞬间${index + 1}`;
+                const imgDesc = photo.imgdesc || `${category}${index + 1}`;
                 if (!imgUrl) return;
 
                 // 创建图片项
@@ -290,33 +403,55 @@
                 photoItem.addEventListener('click', () => openImagePreview(imgUrl, imgDesc));
                 galleryContainer.appendChild(photoItem);
             });
-        })
-        .catch(error => {
-            // 显示错误提示
-            galleryContainer.innerHTML = `<div class="error-tip">加载失败：${error.message}</div>`;
-            console.error('精彩瞬间图片加载错误：', error);
-        });
         }
 
         // 打开图片预览弹窗
         function openImagePreview(imgUrl, imgDesc) {
             const modal = document.getElementById('imagePreviewModal');
-            const previewImg = document.getElementById('previewImage');
-            // 设置图片地址和描述
-            previewImg.src = imgUrl;
-            previewImg.alt = imgDesc;
-            // 显示弹窗（改为flex布局）
-            modal.style.display = 'flex';
-            // 阻止页面滚动
-            document.body.style.overflow = 'hidden';
+            
+            // 先清空原有容器
+            modal.innerHTML = '';
+            
+            // 创建图片外层容器
+            const previewWrapper = document.createElement('div');
+            previewWrapper.id = 'previewImageWrapper';
+            
+            // 创建关闭按钮
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '×';
+            closeBtn.onclick = closeImagePreview;
+            
+            // 创建图片元素
+            const img = document.createElement('img');
+            img.id = 'previewImage';
+            img.className = 'preview-image';
+            img.alt = imgDesc;
+            
+            // 图片加载完成后再显示
+            img.onload = function() {
+                previewWrapper.appendChild(img);
+                previewWrapper.appendChild(closeBtn);
+                modal.appendChild(previewWrapper);
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            };
+            
+            // 设置图片地址
+            img.src = imgUrl;
+            
+            // 图片加载失败处理
+            img.onerror = function() {
+                modal.innerHTML = '<div style="color:white; padding:20px;">图片加载失败</div>';
+                modal.style.display = 'flex';
+            };
         }
 
         // 关闭图片预览弹窗
         function closeImagePreview() {
             const modal = document.getElementById('imagePreviewModal');
-            const previewImg = document.getElementById('previewImage');
-            // 清空图片地址
-            previewImg.src = '';
+            // 清空图片容器
+            modal.innerHTML = '';
             // 隐藏弹窗
             modal.style.display = 'none';
             // 恢复页面滚动
@@ -585,7 +720,7 @@
             }
             renderCalendar(currentCalendarYear, currentCalendarMonth);
         });
-
+                           
         document.getElementById('next-month')?.addEventListener('click', () => {
             currentCalendarMonth++;
             if (currentCalendarMonth > 11) {
@@ -601,9 +736,9 @@
             loadTopVideos();
             // 初始化直播录像列表
             initRecentVideosList();
-            // 初始化照片墙（如果默认显示首页则不加载，切换时再加载）
+            // 初始化照片墙（默认加载豌豆分类）
             if (document.querySelector('.nav a.active').dataset.target === 'photo') {
-                loadPhotoGallery();
+                loadPhotoGallery('豌豆');
             }
         });
     </script>

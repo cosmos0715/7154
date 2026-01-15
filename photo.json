@@ -1,18 +1,37 @@
 [
     {
         "url": "https://raw.githubusercontent.com/cosmos0715/picture/img/img/20260115235011111.jpg",
-        "imgdesc": "阿勒泰1"
+        "imgdesc": "阿勒泰1",
+        "category": "豆酒"
     },
     {
         "url": "https://raw.githubusercontent.com/cosmos0715/picture/img/img/20260115235011110.jpg",
-        "imgdesc": "阿勒泰2"
+        "imgdesc": "阿勒泰1",
+        "category": "豌豆"
     },
     {
         "url": "https://raw.githubusercontent.com/cosmos0715/picture/img/img/20260115235011108.jpg",
-        "imgdesc": "阿勒泰3"
+        "imgdesc": "阿勒泰2",
+        "category": "豌豆"
+    },
+        {      
+        "url": "https://raw.githubusercontent.com/cosmos0715/picture/img/img/20260115235535659.jpg",
+        "imgdesc": "阿勒泰2",
+        "category": "豆酒"
+    },
+        {
+        "url": "",
+        "imgdesc": "",
+        "category": "豌豆"
     },
     {
-        "url": "https://raw.githubusercontent.com/cosmos0715/picture/img/img/20260115235535659.jpg",
-        "imgdesc": "阿勒泰4"
-    }
+        "url": "",
+        "imgdesc": "",
+        "category": "豆酒"
+    },
+    {
+        "url": "",
+        "imgdesc": "",
+        "category": "合照"
+    }             
 ]
